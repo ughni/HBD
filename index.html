@@ -17,7 +17,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: rgb(100, 100, 100)(143, 108, 108)(143, 108, 108);
+      background-image: url('https://i.ibb.co/yYRLK92/bg-texture.jpg');
       background-size: cover;
       background-position: center;
       height: 100vh;
@@ -25,6 +25,20 @@
       font-family: 'Arial', sans-serif;
       position: relative;
       overflow: hidden;
+      touch-action: manipulation;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      font-size: 2rem;
+      font-family: 'Courier Prime', monospace;
+      cursor: pointer;
     }
 
     .flowers {
@@ -123,14 +137,6 @@
       transform: rotate(10deg);
     }
 
-    .flower-deco {
-      position: absolute;
-      width: clamp(30px, 10vw, 60px);
-      bottom: clamp(5px, 1vw, 10px);
-      left: clamp(5px, 1vw, 10px);
-      display: none; /* Disabled to save space */
-    }
-
     .button {
       background-color: #8B0000;
       color: white;
@@ -147,35 +153,33 @@
       background-color: #a00000;
     }
 
+    .music-control {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 10;
+      user-select: none;
+    }
+
     @keyframes sway {
       0% {
         transform: rotate(0deg) translateX(0);
       }
+
       50% {
         transform: rotate(3deg) translateX(3px);
       }
+
       100% {
         transform: rotate(-3deg) translateX(-3px);
-      }
-    }
-
-    /* Media Queries for extra small devices */
-    @media (max-width: 400px) {
-      .title {
-        font-size: 1.3rem;
-      }
-      .special {
-        font-size: 1.8rem;
-      }
-      .photo-frame img {
-        width: 130px;
-      }
-    }
-
-    /* Prevent landscape scrolling on mobile */
-    @media (max-height: 500px) {
-      .container {
-        transform: scale(0.8);
       }
     }
   </style>
@@ -183,8 +187,20 @@
 
 <body>
 
+  <div class="overlay" id="startOverlay">
+   Klik DiSini 🎉
+  </div>
+
+  <audio id="birthdayMusic" loop preload="auto">
+    <source src="Happy Birthday to You - piano instrumental with lyrics.mp3" type="audio/mpeg">
+    <source src="Happy Birthday to You - piano instrumental with lyrics.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="music-control" id="musicControl">🔇</div>
+
   <div class="flowers">
-    <img src="img2.png" class="top-left" style="animation-delay: 0s;">
+    <img src="img2.png" class="top-left">
     <img src="img3.png" class="top-right">
     <img src="img3.png" class="bottom-right">
     <img src="img2.png" class="bottom-left">
@@ -197,12 +213,48 @@
       <div class="tape-top"></div>
       <img src="img8 (2).jpeg" alt="Photo">
       <div class="tape-bottom"></div>
-      <!-- Removed flower-deco to save space -->
     </div>
 
-    <button class="button" onclick="window.location.href='halaman2.html'">Click Me</button>
+    <button class="button" onclick="window.location.href='halaman2.html'">Klik Disini</button>
   </div>
 
+  <script>
+    const music = document.getElementById('birthdayMusic');
+    const musicControl = document.getElementById('musicControl');
+    const overlay = document.getElementById('startOverlay');
+    let musicPlaying = false;
+
+    music.volume = 0.5;
+
+    function startExperience() {
+      overlay.style.display = 'none';
+
+      music.play().then(() => {
+        musicPlaying = true;
+        musicControl.textContent = '🔊';
+      }).catch(error => {
+        console.log("Playback prevented:", error);
+        musicControl.textContent = '🔇 (Tap to enable)';
+      });
+    }
+
+    overlay.addEventListener('click', startExperience);
+
+    musicControl.addEventListener('click', () => {
+      if (musicPlaying) {
+        music.pause();
+        musicPlaying = false;
+        musicControl.textContent = '🔇';
+      } else {
+        music.play().then(() => {
+          musicPlaying = true;
+          musicControl.textContent = '🔊';
+        }).catch(error => {
+          console.log("Playback prevented:", error);
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

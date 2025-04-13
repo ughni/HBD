@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-            font-family:  sans-serif;
+            font-family: sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,7 +19,7 @@
             color: #333;
             overflow-x: hidden;
         }
-        
+
         .card {
             background-color: white;
             border-radius: 20px;
@@ -32,21 +33,21 @@
             z-index: 10;
             margin: 20px;
         }
-        
+
         h1 {
             color: #e84393;
             margin-bottom: 15px;
             font-size: clamp(22px, 5vw, 32px);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
-        
+
         p {
             font-size: clamp(15px, 3vw, 17px);
             line-height: 1.6;
             margin-bottom: 15px;
             padding: 0 10px;
         }
-        
+
         .balloons {
             position: fixed;
             width: 100%;
@@ -56,7 +57,7 @@
             pointer-events: none;
             z-index: 1;
         }
-        
+
         .balloon {
             position: absolute;
             width: clamp(30px, 8vw, 50px);
@@ -65,7 +66,7 @@
             animation: float 8s infinite ease-in;
             opacity: 0.8;
         }
-        
+
         .balloon:before {
             content: "";
             position: absolute;
@@ -76,7 +77,7 @@
             left: 50%;
             transform: translateX(-50%);
         }
-        
+
         .signature {
             font-style: italic;
             margin-top: 25px;
@@ -84,13 +85,23 @@
             color: #e84393;
             font-size: clamp(16px, 3vw, 18px);
         }
-        
+
         @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
-        
+
         .photo-frame {
             width: clamp(100px, 25vw, 150px);
             height: clamp(100px, 25vw, 150px);
@@ -102,75 +113,131 @@
             position: relative;
             z-index: 20;
         }
-        
+
         .photo-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
+        .music-control {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            user-select: none;
+            display: none;
+        }
+
+        .music-control.show {
+            display: flex;
+        }
+
         .birthday-cake {
             font-size: clamp(40px, 10vw, 50px);
             margin: 15px 0;
             animation: bounce 2s infinite;
         }
-        
+
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
-        
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: clamp(20px, 5vw, 30px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            cursor: pointer;
+            text-align: center;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 400px) {
             .card {
                 padding: 20px 15px;
                 margin: 15px;
             }
-            
+
             h1 {
                 margin-bottom: 10px;
             }
-            
+
             p {
                 margin-bottom: 12px;
                 line-height: 1.5;
             }
-            
+
             .signature {
                 margin-top: 20px;
             }
         }
-        
+
         @media (min-width: 768px) {
             .card {
                 padding: 30px;
             }
-            
+
             .photo-frame {
                 margin-bottom: 20px;
             }
         }
     </style>
 </head>
+
 <body>
+
+    <div class="overlay" id="startOverlay">
+        Klik DiSini 🎉
+    </div>
+
+    <audio id="birthdayMusic" loop preload="auto">
+        <source src="Happy Birthday to You - piano instrumental with lyrics.mp3" type="audio/mpeg">
+        <source src="Happy Birthday to You - piano instrumental with lyrics.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="music-control" id="musicControl">🔇</div>
+
     <div class="balloons" id="balloons"></div>
-    
+
     <div class="card">
-      <div class="photo-frame">
-        <!-- Ganti dengan foto dia -->
-        <img src="img7.jpeg" alt="Foto Kamu">
-      </div>
-      
-      <h1>🎉 Selamat Ulang Tahun ya Putt! 🎉</h1>
-      
-      <p>Di kemarin spesialmu ini, aku ingin mengucapkan:</p>
-      
-      <p>Semoga setiap harimu diisi dengan kebahagiaan, setiap langkahmu ditemani keberuntungan, dan setiap mimpimu menjadi kenyataan.</p>
-      
-      
-      <p>Semoga tahun ini membawa lebih banyak tawa, dan pikir masa depan kamu.</p>
-      
-      <p class="signature">Saya Mughni,<br>maaf telat buatnya ini semoga suka👍🏻 <br> Sekian TerimaKasih Wasallam WR.WB</p>
+        <div class="photo-frame">
+            <img src="img7.jpeg" alt="Foto Kamu">
+        </div>
+
+        <h1>🎉 Selamat Ulang Tahun ya Putt! 🎉</h1>
+
+        <p>Di kemarin spesialmu ini, aku ingin mengucapkan:</p>
+
+        <p>Semoga setiap harimu diisi dengan kebahagiaan, setiap langkahmu ditemani keberuntungan, dan setiap mimpimu
+            menjadi kenyataan.</p>
+
+        <p>Semoga tahun ini membawa lebih banyak tawa, dan pikir masa depan kamu.</p>
+
+        <p class="signature">Saya Mughni,<br>maaf telat buatnya ini semoga suka👍🏻 <br> Sekian TerimaKasih Wasallam
+            WR.WB</p>
     </div>
 
     <script>
@@ -179,7 +246,7 @@
             const balloonsContainer = document.getElementById('balloons');
             const colors = ['#e84393', '#fd79a8', '#74b9ff', '#55efc4', '#ffeaa7', '#a29bfe'];
             const balloonCount = window.innerWidth < 400 ? 15 : 20;
-            
+
             for (let i = 0; i < balloonCount; i++) {
                 const balloon = document.createElement('div');
                 balloon.classList.add('balloon');
@@ -190,19 +257,55 @@
                 balloonsContainer.appendChild(balloon);
             }
         }
-        
-        // Panggil fungsi dan buat responsive saat resize
+
         createBalloons();
-        
-        // Bersihkan dan buat ulang balon saat resize untuk menghindari penumpukan
+
+        // Bersihkan dan buat ulang balon saat resize
         let resizeTimer;
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
             clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function() {
+            resizeTimer = setTimeout(function () {
                 document.getElementById('balloons').innerHTML = '';
                 createBalloons();
             }, 200);
         });
+
+        const music = document.getElementById('birthdayMusic');
+        const musicControl = document.getElementById('musicControl');
+        const overlay = document.getElementById('startOverlay');
+        let musicPlaying = false;
+
+        music.volume = 0.5;
+
+        function startExperience() {
+            overlay.style.display = 'none';
+
+            music.play().then(() => {
+                musicPlaying = true;
+                musicControl.textContent = '🔊';
+            }).catch(error => {
+                console.log("Playback prevented:", error);
+                musicControl.textContent = '🔇 (Tap to enable)';
+            });
+        }
+
+        overlay.addEventListener('click', startExperience);
+
+        musicControl.addEventListener('click', () => {
+            if (musicPlaying) {
+                music.pause();
+                musicPlaying = false;
+                musicControl.textContent = '🔇';
+            } else {
+                music.play().then(() => {
+                    musicPlaying = true;
+                    musicControl.textContent = '🔊';
+                }).catch(error => {
+                    console.log("Playback prevented:", error);
+                });
+            }
+        });
     </script>
 </body>
+
 </html>
