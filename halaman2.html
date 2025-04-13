@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hallo Sayang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://i.ibb.co/yYRLK92/bg-texture.jpg');
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .flowers {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .flowers img {
+      position: absolute;
+      width: 80px;
+      max-width: 20vw;
+      animation: sway 3s ease-in-out infinite alternate;
+    }
+
+    .top-left {
+      top: 5%;
+      left: 5%;
+    }
+
+    .top-right {
+      top: 5%;
+      right: 5%;
+    }
+
+    .bottom-left {
+      bottom: 5%;
+      left: 5%;
+    }
+
+    .bottom-right {
+      bottom: 5%;
+      right: 5%;
+    }
+
+    .popup {
+      width: 90%;
+      max-width: 400px;
+      background-color: #fff;
+      border: 2px solid #d57c4b;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      margin: 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .popup-header {
+      background-color: #ffd8b1;
+      padding: 10px;
+      color: #7b3f00;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+    }
+
+    .popup-header span {
+      position: absolute;
+      left: 15px;
+      font-weight: bold;
+    }
+
+    .close-btn {
+      font-weight: bold;
+      color: #7b3f00;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .popup-content {
+      padding: 20px;
+    }
+
+    .popup-content img {
+      width: 100px;
+      max-width: 30vw;
+      margin-bottom: 15px;
+    }
+
+    .popup-content h3 {
+      margin: 0;
+      font-weight: bold;
+      color: #7b3f00;
+      font-size: clamp(16px, 4vw, 20px);
+      padding: 0 10px;
+    }
+
+    .ok-btn {
+      margin-top: 20px;
+      padding: 8px 16px;
+      min-width: 80px;
+      background-color: #98e898;
+      border: 2px solid #4e914e;
+      color: #333;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .ok-btn:hover {
+      background-color: #7fe07f;
+    }
+
+    @keyframes sway {
+      0% {
+        transform: rotate(0deg) translateX(0);
+      }
+      50% {
+        transform: rotate(3deg) translateX(3px);
+      }
+      100% {
+        transform: rotate(-3deg) translateX(-3px);
+      }
+    }
+
+    /* Media queries untuk perangkat sangat kecil */
+    @media (max-width: 400px) {
+      .flowers img {
+        width: 60px;
+      }
+      .popup-content img {
+        width: 80px;
+      }
+      .popup {
+        margin: 10px;
+      }
+      .popup-content h3 {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="flowers">
+    <img src="img2.png" class="top-left" style="animation-delay: 0s;">
+    <img src="img3.png" class="top-right" style="animation-delay: 1s;">
+    <img src="img3.png" class="bottom-right">
+    <img src="img2.png" class="bottom-left">
+  </div>
+
+  <div class="popup">
+    <div class="popup-header">
+      <span>💕</span>
+      <button class="close-btn" onclick="window.close()">✖</button>
+    </div>
+    <div class="popup-content">
+      <img src="Stiker 16.gif" alt="Cute Char">
+      <h3>Hallo Puttt 👋🏻</h3>
+      <button class="ok-btn" onclick="window.location.href='halaman3.html'">OK</button>
+    </div>
+  </div>
+</body>
+</html>

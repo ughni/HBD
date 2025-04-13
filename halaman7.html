@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun!</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+            margin: 20px;
+        }
+        
+        h1 {
+            color: #e84393;
+            margin-bottom: 15px;
+            font-size: clamp(22px, 5vw, 32px);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        p {
+            font-size: clamp(15px, 3vw, 17px);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+        
+        .balloons {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: clamp(30px, 8vw, 50px);
+            height: clamp(40px, 10vw, 60px);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in;
+            opacity: 0.8;
+        }
+        
+        .balloon:before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: clamp(40px, 10vw, 60px);
+            background: #999;
+            bottom: clamp(-40px, -10vw, -60px);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .signature {
+            font-style: italic;
+            margin-top: 25px;
+            font-weight: bold;
+            color: #e84393;
+            font-size: clamp(16px, 3vw, 18px);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        .photo-frame {
+            width: clamp(100px, 25vw, 150px);
+            height: clamp(100px, 25vw, 150px);
+            border-radius: 50%;
+            border: 4px solid #a1c4fd;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 20;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .birthday-cake {
+            font-size: clamp(40px, 10vw, 50px);
+            margin: 15px 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 400px) {
+            .card {
+                padding: 20px 15px;
+                margin: 15px;
+            }
+            
+            h1 {
+                margin-bottom: 10px;
+            }
+            
+            p {
+                margin-bottom: 12px;
+                line-height: 1.5;
+            }
+            
+            .signature {
+                margin-top: 20px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .card {
+                padding: 30px;
+            }
+            
+            .photo-frame {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="balloons" id="balloons"></div>
+    
+    <div class="card">
+      <div class="photo-frame">
+        <!-- Ganti dengan foto dia -->
+        <img src="img7.jpeg" alt="Foto Kamu">
+      </div>
+      
+      <h1>🎉 Selamat Ulang Tahun ya Putt! 🎉</h1>
+      
+      <p>Di kemarin spesialmu ini, aku ingin mengucapkan:</p>
+      
+      <p>Semoga setiap harimu diisi dengan kebahagiaan, setiap langkahmu ditemani keberuntungan, dan setiap mimpimu menjadi kenyataan.</p>
+      
+      
+      <p>Semoga tahun ini membawa lebih banyak tawa, dan pikir masa depan kamu.</p>
+      
+      <p class="signature">Saya Mughni,<br>maaf telat buatnya ini semoga suka👍🏻 <br> Sekian TerimaKasih Wasallam WR.WB</p>
+    </div>
+
+    <script>
+        // Membuat efek balon mengambang (responsive)
+        function createBalloons() {
+            const balloonsContainer = document.getElementById('balloons');
+            const colors = ['#e84393', '#fd79a8', '#74b9ff', '#55efc4', '#ffeaa7', '#a29bfe'];
+            const balloonCount = window.innerWidth < 400 ? 15 : 20;
+            
+            for (let i = 0; i < balloonCount; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                balloon.style.animationDelay = Math.random() * 5 + 's';
+                balloonsContainer.appendChild(balloon);
+            }
+        }
+        
+        // Panggil fungsi dan buat responsive saat resize
+        createBalloons();
+        
+        // Bersihkan dan buat ulang balon saat resize untuk menghindari penumpukan
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                document.getElementById('balloons').innerHTML = '';
+                createBalloons();
+            }, 200);
+        });
+    </script>
+</body>
+</html>

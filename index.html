@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Special Day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Courier+Prime&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://i.ibb.co/yYRLK92/bg-texture.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      width: 100vw;
+      font-family: 'Arial', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flowers {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .flowers img {
+      position: absolute;
+      width: clamp(60px, 15vw, 100px);
+      animation: sway 3s ease-in-out infinite alternate;
+    }
+
+    .top-left {
+      top: 5%;
+      left: 5%;
+    }
+
+    .top-right {
+      top: 5%;
+      right: 5%;
+    }
+
+    .bottom-left {
+      bottom: 5%;
+      left: 5%;
+    }
+
+    .bottom-right {
+      bottom: 5%;
+      right: 5%;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .title {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      color: #6b0000;
+      margin-bottom: clamp(10px, 3vh, 20px);
+      line-height: 1.2;
+    }
+
+    .special {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2rem, 7vw, 2.5rem);
+      color: #8B0000;
+      display: block;
+    }
+
+    .photo-frame {
+      margin: clamp(10px, 3vh, 20px) 0;
+      position: relative;
+      display: inline-block;
+      max-width: 90vw;
+    }
+
+    .photo-frame img {
+      width: clamp(150px, 50vw, 200px);
+      height: auto;
+      border: clamp(5px, 2vw, 10px) solid white;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+      object-fit: cover;
+    }
+
+    .tape-top,
+    .tape-bottom {
+      position: absolute;
+      width: clamp(30px, 10vw, 50px);
+      height: clamp(10px, 3vw, 20px);
+      background-color: #e4d6c2;
+      transform: rotate(-10deg);
+    }
+
+    .tape-top {
+      top: clamp(-5px, -1vw, -10px);
+      left: clamp(-5px, -1vw, -10px);
+    }
+
+    .tape-bottom {
+      bottom: clamp(-5px, -1vw, -10px);
+      right: clamp(-5px, -1vw, -10px);
+      transform: rotate(10deg);
+    }
+
+    .flower-deco {
+      position: absolute;
+      width: clamp(30px, 10vw, 60px);
+      bottom: clamp(5px, 1vw, 10px);
+      left: clamp(5px, 1vw, 10px);
+      display: none; /* Disabled to save space */
+    }
+
+    .button {
+      background-color: #8B0000;
+      color: white;
+      padding: clamp(8px, 2vh, 10px) clamp(15px, 4vw, 20px);
+      font-family: 'Courier Prime', monospace;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: clamp(10px, 3vh, 20px);
+    }
+
+    .button:hover {
+      background-color: #a00000;
+    }
+
+    @keyframes sway {
+      0% {
+        transform: rotate(0deg) translateX(0);
+      }
+      50% {
+        transform: rotate(3deg) translateX(3px);
+      }
+      100% {
+        transform: rotate(-3deg) translateX(-3px);
+      }
+    }
+
+    /* Media Queries for extra small devices */
+    @media (max-width: 400px) {
+      .title {
+        font-size: 1.3rem;
+      }
+      .special {
+        font-size: 1.8rem;
+      }
+      .photo-frame img {
+        width: 130px;
+      }
+    }
+
+    /* Prevent landscape scrolling on mobile */
+    @media (max-height: 500px) {
+      .container {
+        transform: scale(0.8);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="flowers">
+    <img src="img2.png" class="top-left" style="animation-delay: 0s;">
+    <img src="img3.png" class="top-right">
+    <img src="img3.png" class="bottom-right">
+    <img src="img2.png" class="bottom-left">
+  </div>
+
+  <div class="container">
+    <div class="title">Happy<br><span class="special">Special Day</span></div>
+
+    <div class="photo-frame">
+      <div class="tape-top"></div>
+      <img src="img8 (2).jpeg" alt="Photo">
+      <div class="tape-bottom"></div>
+      <!-- Removed flower-deco to save space -->
+    </div>
+
+    <button class="button" onclick="window.location.href='halaman2.html'">Click Me</button>
+  </div>
+
+</body>
+
+</html>
